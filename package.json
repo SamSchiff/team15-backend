@@ -1,0 +1,43 @@
+{
+  "name": "team-15-project",
+  "version": "1.0.0",
+  "description": "team 15 project",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js --exec babel-node",
+    "start": "babel-node server.js",
+    "build": "babel src --source-maps --out-dir dist",
+    "prod": "npm run build; node dist/server.js"
+  },
+  "author": "Sam Schiff, Brittany Critchfield",
+  "license": "",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/register": "^7.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.18.3",
+    "path": "^0.12.7"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.0.0-beta.55",
+    "babel-eslint": "^10.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "morgan": "^1.9.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^1.19.4",
+    "qrcode": "^1.4.4"
+  }
+}
