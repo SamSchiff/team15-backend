@@ -39,3 +39,45 @@ export const createPatient = async (req, res) => {
     });
   });
 };
+
+export const getAllPatients = async (req, res) => {
+  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId;';
+  global.connection.query(sql, (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getAllDoctors = async (req, res) => {
+  const sql = 'select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID;';
+  global.connection.query(sql, (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getAllWards = async (req, res) => {
+  const sql = 'select * from Wards;';
+  global.connection.query(sql, (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getPatient = async (req, res) => {
+  const { personId } = req.query;
+  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId where pe.PersonId = ?;';
+  global.connection.query(sql, [personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getDoctor = async (req, res) => {
+  const { personId } = req.query;
+  const sql = 'select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID where p.personId = ?;';
+  global.connection.query(sql, [personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};

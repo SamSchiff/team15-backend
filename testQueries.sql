@@ -6,6 +6,14 @@ select * from Doctors limit 100;
 select * from Wards limit 100;
 select * from Patients limit 100;
 
+select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId;
+
+select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID;
+
+select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId where pe.PersonId = 12345;
+
+select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID where p.personId = 238987611;
+
 insert into 
 People (
 	PersonId, PersonType, LastName, FirstName, Age, COVIDPositive
