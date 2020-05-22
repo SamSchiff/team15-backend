@@ -11,6 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema Hospitals_sp20
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `Hospitals_sp20`;
 CREATE SCHEMA IF NOT EXISTS `Hospitals_sp20` DEFAULT CHARACTER SET utf8 ;
 USE `Hospitals_sp20` ;
 
@@ -103,10 +104,9 @@ ENGINE = InnoDB;
 -- Table `Hospitals_sp20`.`DoctorsPatients`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`DoctorsPatients` (
-  `DoctorsPatientsID` INT NOT NULL,
   `PatientID` INT NOT NULL,
   `DoctorID` INT NOT NULL,
-  PRIMARY KEY (`DoctorsPatientsID`),
+  PRIMARY KEY (`DoctorID`, `PatientID`),
   INDEX `fk_DoctorsPatients_Patients1_idx` (`PatientID` ASC),
   INDEX `fk_DoctorsPatients_Doctors1_idx` (`DoctorID` ASC),
   CONSTRAINT `fk_DoctorsPatients_Patients1`
@@ -147,10 +147,9 @@ ENGINE = InnoDB;
 -- Table `Hospitals_sp20`.`DoctorsSpecialties`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`DoctorsSpecialties` (
-  `DoctorsSpecialtiesID` INT NOT NULL,
   `DoctorID` INT NOT NULL,
   `SpecialtyID` INT NOT NULL,
-  PRIMARY KEY (`DoctorsSpecialtiesID`),
+  PRIMARY KEY (`DoctorID`, `SpecialtyID`),
   INDEX `fk_DoctorsSpecialties_Doctors1_idx` (`DoctorID` ASC),
   INDEX `fk_DoctorsSpecialties_Specialties1_idx` (`SpecialtyID` ASC),
   CONSTRAINT `fk_DoctorsSpecialties_Doctors1`
@@ -203,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`Staff` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Staff_Doctors1`
     FOREIGN KEY (`PersonID`)
-    REFERENCES `Hospitals_sp20`.`Doctors` (`PersonID`)
+    REFERENCES `Hospitals_sp20`.`People` (`PersonID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
