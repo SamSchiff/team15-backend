@@ -16,7 +16,7 @@ router.route('/doctor/all')
 
 router.route('/patient')
   .get()
-  .post()
+  .post(Controller.createPatient)
   .put() // update checkedIn
   .delete();
 

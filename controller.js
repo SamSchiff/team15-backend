@@ -25,3 +25,17 @@ export const createDoctor = async (req, res) => {
     });
   });
 };
+
+export const createPatient = async (req, res) => {
+  const { firstName, lastName, age, covidPositive } = req.body;
+  const personId = parseInt(Math.random() * 1000000000);
+  let sql = 'insert into People (PersonId, PersonType, LastName, FirstName, Age, COVIDPositive) values (?,?,?,?,?,?);';
+  global.connection.query(sql, [personId, 'Patient', lastName, firstName, age, covidPositive], (err, response1) => {
+    if (err) console.error(err);
+    sql = 'insert into Patients (PersonId, CheckedIn) values (?,?);';
+    global.connection.query(sql, [personId, 1], (err, response2) => {
+      if (err) console.error(err);
+      res.send('success');
+    });
+  });
+};

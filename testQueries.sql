@@ -4,6 +4,7 @@ select * from People limit 100;
 select * from Staff limit 100;
 select * from Doctors limit 100;
 select * from Wards limit 100;
+select * from Patients limit 100;
 
 insert into 
 People (
@@ -57,3 +58,20 @@ Doctors (
 values (
 	12345, 123456
 );
+
+insert into 
+People (
+	PersonId, PersonType, LastName, FirstName, Age, COVIDPositive
+) 
+values (
+	123456, "Patient", "Patient", "Test", 25, 1
+);
+
+insert into 
+Patients (
+	PersonId, CheckedIn
+)
+values (
+	123456, 1
+);
+
