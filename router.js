@@ -3,7 +3,6 @@ import * as Controller from './controller';
 
 const router = Router();
 
-router.route('/test').get(Controller.testQuery);
 
 router.route('/doctor')
   .get(Controller.getDoctor)

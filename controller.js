@@ -1,13 +1,4 @@
 
-export const testQuery = async (req, res) => {
-  const sql = 'SELECT * FROM Doctors limit 100';
-  global.connection.query(sql, (err, response) => {
-    if (err) console.error(err);
-    console.log(response);
-    res.send('success');
-  });
-};
-
 export const createDoctor = async (req, res) => {
   const { firstName, lastName, age, covidPositive, wardId } = req.body;
   const personId = parseInt(Math.random() * 1000000000);
