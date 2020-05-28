@@ -41,15 +41,6 @@ export const createBed = async (req, res) => {
 }
 
 export const getAllPatients = async (req, res) => {
-  const { bedId, wardId } = req.body;
-  const sql = 'insert into Beds ;';
-  global.connection.query(sql, (err, response) => {
-    if (err) console.error(err);
-    res.send(response);
-  });
-};
-
-export const getAllPatients = async (req, res) => {
   const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId;';
   global.connection.query(sql, (err, response) => {
     if (err) console.error(err);
