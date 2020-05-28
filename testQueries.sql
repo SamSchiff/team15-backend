@@ -14,44 +14,46 @@ select * from People as pe inner join Patients as pa on pe.personID = pa.PersonI
 
 select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID where p.personId = 238987611;
 
-insert into 
+select * from Wards where WardID = 123456;
+
+insert into
 People (
 	PersonId, PersonType, LastName, FirstName, Age, COVIDPositive
-) 
+)
 values (
 	12345, "Staff", "User", "Test", 24, 0
 );
 
-insert into 
+insert into
 Staff (
 	PersonId, StaffType
-) 
+)
 values (
 	12345, "Doctor"
 );
 
-insert into 
+insert into
 Wards (
 	WardID, WardName, COVIDExposed
 )
 values (
 	123456, "Covid Ward 1", 1
 );
-insert into 
+insert into
 Wards (
 	WardID, WardName, COVIDExposed
 )
 values (
 	1234567, "Covid Ward 2", 1
 );
-insert into 
+insert into
 Wards (
 	WardID, WardName, COVIDExposed
 )
 values (
 	12345678, "Non-Covid Ward 1", 0
 );
-insert into 
+insert into
 Wards (
 	WardID, WardName, COVIDExposed
 )
@@ -59,7 +61,7 @@ values (
 	123456789, "Non-Covid Ward 2", 0
 );
 
-insert into 
+insert into
 Doctors (
 	PersonId, WardID
 )
@@ -67,19 +69,18 @@ values (
 	12345, 123456
 );
 
-insert into 
+insert into
 People (
 	PersonId, PersonType, LastName, FirstName, Age, COVIDPositive
-) 
+)
 values (
 	123456, "Patient", "Patient", "Test", 25, 1
 );
 
-insert into 
+insert into
 Patients (
 	PersonId, CheckedIn
 )
 values (
 	123456, 1
 );
-

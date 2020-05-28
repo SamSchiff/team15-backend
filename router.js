@@ -7,8 +7,8 @@ const router = Router();
 router.route('/doctor')
   .get(Controller.getDoctor)
   .post(Controller.createDoctor)
-  .put() // update which ward
-  .delete();
+  .put(Controller.assignDoctorToWard) // update which ward
+  .delete(Controller.deletePerson);
 
 router.route('/doctor/all')
   .get(Controller.getAllDoctors);
@@ -16,27 +16,27 @@ router.route('/doctor/all')
 router.route('/patient')
   .get(Controller.getPatient)
   .post(Controller.createPatient)
-  .put() // update checkedIn
-  .delete();
+  .put(Controller.checkInPatient) // update checkedIn
+  .delete(Controller.deletePerson);
 
 router.route('/patient/all')
   .get(Controller.getAllPatients);
 
 router.route('/patient/bed')
-  .put(); // connect a bedId to a patient
+  .put(Controller.assignPatientToBed); // connect a bedId to a patient
 
 router.route('/doctor/ward')
-  .put();
+  .put(Controller.assignDoctorToWard);
 
 router.route('/ward')
-  .get();
+  .get(Controller.getWard);
 
 router.route('/ward/all')
   .get(Controller.getAllWards);
 
 router.route('/bed')
-  .get()
-  .post()
-  .delete();
+  .get(Controller.getBed)
+  .post(Controller.createBed)
+  .delete(Controller.deleteBed);
 
 export default router;

@@ -31,6 +31,24 @@ export const createPatient = async (req, res) => {
   });
 };
 
+export const createBed = async (req, res) => {
+  const { bedId, wardId } = req.body;
+  let sql = 'insert into Beds (BedID, WardID) values (?, ?);';
+  global.connection.query(sql, [bedId, wardId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+}
+
+export const getAllPatients = async (req, res) => {
+  const { bedId, wardId } = req.body;
+  const sql = 'insert into Beds ;';
+  global.connection.query(sql, (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
 export const getAllPatients = async (req, res) => {
   const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId;';
   global.connection.query(sql, (err, response) => {
@@ -68,6 +86,69 @@ export const getDoctor = async (req, res) => {
   const { personId } = req.query;
   const sql = 'select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID where p.personId = ?;';
   global.connection.query(sql, [personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getWard = async (req, res) => {
+  const { wardId } = req.query;
+  const sql = 'select * from Wards where WardID = ?;';
+  global.connection.query(sql, [wardId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getBed = async (req, res) => {
+  const { bedId } = req.query;
+  const sql = 'select * from Beds where BedID = ?;';
+  global.connection.query(sql, [bedId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const checkInPatient = async (req, res) => {
+  const { personId } = req.query;
+  const sql = 'update Patients set CheckedIn = 1 where PersonID = ?;';
+  global.connection.query(sql, [personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const assignDoctorToWard = async (req, res) => {
+  const { personId, wardId } = req.query;
+  const sql = 'update Doctors set WardID = ? where PersonID = ?;';
+  global.connection.query(sql, [wardId, personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const assignPatientToBed = async (req, res) => {
+  const { personId, bedId } = req.query;
+  const sql = 'update Patients set BedID = ? where PersonID = ?;';
+  global.connection.query(sql, [bedId, personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const deletePerson = async (req, res) => {
+  const { personId } = req.query;
+  const sql = 'delete from People where PersonID = ?';
+  global.connection.query(sql, [personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const deleteBed = async (req, res) => {
+  const { bedId } = req.query;
+  const sql = 'delete from Beds where BedID = ?';
+  global.connection.query(sql, [bedId], (err, response) => {
     if (err) console.error(err);
     res.send(response);
   });

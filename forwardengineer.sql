@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`Patients` (
   CONSTRAINT `fk_Patients_People1`
     FOREIGN KEY (`PersonID`)
     REFERENCES `Hospitals_sp20`.`People` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`Doctors` (
   CONSTRAINT `fk_Doctors_Wards1`
     FOREIGN KEY (`WardID`)
     REFERENCES `Hospitals_sp20`.`Wards` (`WardID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -112,12 +112,12 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`DoctorsPatients` (
   CONSTRAINT `fk_DoctorsPatients_Patients1`
     FOREIGN KEY (`PatientID`)
     REFERENCES `Hospitals_sp20`.`Patients` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DoctorsPatients_Doctors1`
     FOREIGN KEY (`DoctorID`)
     REFERENCES `Hospitals_sp20`.`Doctors` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -155,12 +155,12 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`DoctorsSpecialties` (
   CONSTRAINT `fk_DoctorsSpecialties_Doctors1`
     FOREIGN KEY (`DoctorID`)
     REFERENCES `Hospitals_sp20`.`Doctors` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DoctorsSpecialties_Specialties1`
     FOREIGN KEY (`SpecialtyID`)
     REFERENCES `Hospitals_sp20`.`Specialties` (`SpecialtyID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -178,12 +178,12 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`PatientsSpecialtiesNeeded` (
   CONSTRAINT `fk_PatientsSpecialtiesNeeded_Patients1`
     FOREIGN KEY (`PatientID`)
     REFERENCES `Hospitals_sp20`.`Patients` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PatientsSpecialtiesNeeded_Specialties1`
     FOREIGN KEY (`SpecialtyNeededID`)
     REFERENCES `Hospitals_sp20`.`Specialties` (`SpecialtyID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`Staff` (
   CONSTRAINT `fk_Staff_People1`
     FOREIGN KEY (`PersonID`)
     REFERENCES `Hospitals_sp20`.`People` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Staff_Doctors1`
     FOREIGN KEY (`PersonID`)
@@ -221,12 +221,12 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`DoctorsEquipment` (
   CONSTRAINT `fk_DoctorsEquipment_Doctors1`
     FOREIGN KEY (`DoctorID`)
     REFERENCES `Hospitals_sp20`.`Doctors` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DoctorsEquipment_Equipment1`
     FOREIGN KEY (`EquipmentID`)
     REFERENCES `Hospitals_sp20`.`Equipment` (`EquipmentID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -244,12 +244,12 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`PatientsEquipment` (
   CONSTRAINT `fk_PatientsEquipment_Equipment1`
     FOREIGN KEY (`EquipmentID`)
     REFERENCES `Hospitals_sp20`.`Equipment` (`EquipmentID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PatientsEquipment_Patients1`
     FOREIGN KEY (`PatientsID`)
     REFERENCES `Hospitals_sp20`.`Patients` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
