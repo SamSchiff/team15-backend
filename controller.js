@@ -33,12 +33,12 @@ export const createPatient = async (req, res) => {
 
 export const createBed = async (req, res) => {
   const { bedId, wardId } = req.body;
-  let sql = 'insert into Beds (BedID, WardID) values (?, ?);';
+  const sql = 'insert into Beds (BedID, WardID) values (?, ?);';
   global.connection.query(sql, [bedId, wardId], (err, response) => {
     if (err) console.error(err);
     res.send(response);
   });
-}
+};
 
 export const getAllPatients = async (req, res) => {
   const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId;';
@@ -101,7 +101,7 @@ export const getBed = async (req, res) => {
 };
 
 export const checkInPatient = async (req, res) => {
-  const { personId } = req.query;
+  const { personId } = req.body;
   const sql = 'update Patients set CheckedIn = 1 where PersonID = ?;';
   global.connection.query(sql, [personId], (err, response) => {
     if (err) console.error(err);
@@ -110,7 +110,7 @@ export const checkInPatient = async (req, res) => {
 };
 
 export const assignDoctorToWard = async (req, res) => {
-  const { personId, wardId } = req.query;
+  const { personId, wardId } = req.body;
   const sql = 'update Doctors set WardID = ? where PersonID = ?;';
   global.connection.query(sql, [wardId, personId], (err, response) => {
     if (err) console.error(err);
@@ -119,7 +119,7 @@ export const assignDoctorToWard = async (req, res) => {
 };
 
 export const assignPatientToBed = async (req, res) => {
-  const { personId, bedId } = req.query;
+  const { personId, bedId } = req.body;
   const sql = 'update Patients set BedID = ? where PersonID = ?;';
   global.connection.query(sql, [bedId, personId], (err, response) => {
     if (err) console.error(err);
@@ -128,7 +128,7 @@ export const assignPatientToBed = async (req, res) => {
 };
 
 export const deletePerson = async (req, res) => {
-  const { personId } = req.query;
+  const { personId } = req.body;
   const sql = 'delete from People where PersonID = ?';
   global.connection.query(sql, [personId], (err, response) => {
     if (err) console.error(err);
@@ -137,7 +137,7 @@ export const deletePerson = async (req, res) => {
 };
 
 export const deleteBed = async (req, res) => {
-  const { bedId } = req.query;
+  const { bedId } = req.body;
   const sql = 'delete from Beds where BedID = ?';
   global.connection.query(sql, [bedId], (err, response) => {
     if (err) console.error(err);
