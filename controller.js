@@ -53,7 +53,7 @@ export const getUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { personId, username, password } = req.query;
+  const { personId, username, password } = req.body;
   const sql = 'update DatabaseUsers set Username = ?, Password = ? where PersonID = ?;';
   global.connection.query(sql, [username, password, personId], (err, response) => {
     if (err) console.error(err);
@@ -62,7 +62,7 @@ export const updateUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  const { personId } = req.query;
+  const { personId } = req.body;
   const sql = 'delete from DatabaseUsers where PersonID = ?';
   global.connection.query(sql, [personId], (err, response) => {
     if (err) console.error(err);

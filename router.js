@@ -9,46 +9,46 @@ router.post('/signin', requireSignin, Controller.signin);
 router.post('/signup', Controller.signup); // post for User
 
 router.route('/user')
-  .get(Controller.getUser)
-  .put(Controller.updateUser)
-  .delete(Controller.deleteUser);
+  .get(requireAuth, Controller.getUser)
+  .put(requireAuth, Controller.updateUser)
+  .delete(requireAuth, Controller.deleteUser);
 
 router.route('/user/all')
   .get(requireAuth, Controller.getAllUsers);
 
 router.route('/doctor')
-  .get(Controller.getDoctor)
-  .post(Controller.createDoctor)
-  .put(Controller.assignDoctorToWard) // update which ward
-  .delete(Controller.deletePerson);
+  .get(requireAuth, Controller.getDoctor)
+  .post(requireAuth, Controller.createDoctor)
+  .put(requireAuth, Controller.assignDoctorToWard) // update which ward
+  .delete(requireAuth, Controller.deletePerson);
 
 router.route('/doctor/all')
-  .get(Controller.getAllDoctors);
+  .get(requireAuth, Controller.getAllDoctors);
 
 router.route('/patient')
-  .get(Controller.getPatient)
-  .post(Controller.createPatient)
-  .put(Controller.checkInPatient) // update checkedIn
-  .delete(Controller.deletePerson);
+  .get(requireAuth, Controller.getPatient)
+  .post(requireAuth, Controller.createPatient)
+  .put(requireAuth, Controller.checkInPatient) // update checkedIn
+  .delete(requireAuth, Controller.deletePerson);
 
 router.route('/patient/all')
-  .get(Controller.getAllPatients);
+  .get(requireAuth, Controller.getAllPatients);
 
 router.route('/patient/bed')
-  .put(Controller.assignPatientToBed); // connect a bedId to a patient
+  .put(requireAuth, Controller.assignPatientToBed); // connect a bedId to a patient
 
 router.route('/doctor/ward')
-  .put(Controller.assignDoctorToWard);
+  .put(requireAuth, Controller.assignDoctorToWard);
 
 router.route('/ward')
-  .get(Controller.getWard);
+  .get(requireAuth, Controller.getWard);
 
 router.route('/ward/all')
-  .get(Controller.getAllWards);
+  .get(requireAuth, Controller.getAllWards);
 
 router.route('/bed')
-  .get(Controller.getBed)
-  .post(Controller.createBed)
-  .delete(Controller.deleteBed);
+  .get(requireAuth, Controller.getBed)
+  .post(requireAuth, Controller.createBed)
+  .delete(requireAuth, Controller.deleteBed);
 
 export default router;
