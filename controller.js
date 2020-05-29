@@ -1,4 +1,75 @@
 
+import jwt from 'jwt-simple';
+import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
+
+dotenv.config({ silent: true });
+
+export const signin = (req, res, next) => {
+  res.send({ token: tokenForUser(req.user) });
+};
+
+export const signup = (req, res, next) => {
+  const { username } = req.body;
+  const { password } = req.body;
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  const newUser = {
+    username: username,
+    password: hash
+  }
+
+  if (!username || !password) {
+    return res.status(422).send('You must provide email and password');
+  }
+  const personId = parseInt(Math.random() * 1000000000);
+  let sql = 'insert into DatabaseUsers (PersonId, Username, Password) values (?,?,?);';
+  global.connection.query(sql, [personId, username, hash], (err, response1) => {
+    if (err) console.error(err);
+    return res.send({ token: tokenForUser(newUser) });
+  });
+};
+
+function tokenForUser(user) {
+  const timestamp = new Date().getTime();
+  return jwt.encode({ sub: user.username, iat: timestamp }, process.env.AUTH_SECRET);
+}
+
+export const getAllUsers = async (req, res) => {
+  const sql = 'select * from DatabaseUsers;';
+  global.connection.query(sql, (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getUser = async (req, res) => {
+  const { personId } = req.query;
+  const sql = 'select * from DatabaseUsers where PersonID = ?;';
+  global.connection.query(sql, [personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const updateUser = async (req, res) => {
+  const { personId, username, password } = req.body;
+  const sql = 'update DatabaseUsers set Username = ?, Password = ? where PersonID = ?;';
+  global.connection.query(sql, [username, password, personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const deleteUser = async (req, res) => {
+  const { personId } = req.body;
+  const sql = 'delete from DatabaseUsers where PersonID = ?';
+  global.connection.query(sql, [personId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
 export const createDoctor = async (req, res) => {
   const { firstName, lastName, age, covidPositive, wardId } = req.body;
   const personId = parseInt(Math.random() * 1000000000);

@@ -1,5 +1,6 @@
 use Hospitals_sp20;
 
+select * from DatabaseUsers limit 100;
 select * from People limit 100;
 select * from Staff limit 100;
 select * from Doctors limit 100;
@@ -15,6 +16,14 @@ select * from People as pe inner join Patients as pa on pe.personID = pa.PersonI
 select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID where p.personId = 238987611;
 
 select * from Wards where WardID = 123456;
+
+insert into
+DatabaseUsers (
+	PersonId, Username, Password
+)
+values (
+	12345, "admin", "password"
+);
 
 insert into
 People (
