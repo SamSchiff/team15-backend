@@ -1,8 +1,20 @@
 import { Router } from 'express';
 import * as Controller from './controller';
+import { requireAuth, requireSignin } from './passport';
 
 const router = Router();
 
+router.post('/signin', requireSignin, Controller.signin);
+
+router.post('/signup', Controller.signup); // post for User
+
+router.route('/user')
+  .get(Controller.getUser)
+  .put(Controller.updateUser)
+  .delete(Controller.deleteUser);
+
+router.route('/user/all')
+  .get(requireAuth, Controller.getAllUsers);
 
 router.route('/doctor')
   .get(Controller.getDoctor)

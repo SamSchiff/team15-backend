@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`DatabaseUsers` (
   CONSTRAINT `fk_DatabaseUsers_Staff1`
     FOREIGN KEY (`PersonID`)
     REFERENCES `Hospitals_sp20`.`Staff` (`PersonID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
