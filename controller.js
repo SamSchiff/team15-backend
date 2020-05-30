@@ -200,10 +200,22 @@ export const assignPatientToBed = async (req, res) => {
 
 export const deletePerson = async (req, res) => {
   const { personId } = req.body;
-  const sql = 'delete from Staff where PersonID = ?; delete from Doctors where PersonID = ?; delete from Patients where PersonID = ?; delete from People where PersonID = ?; ';
-  global.connection.query(sql, [personId, personId, personId, personId], (err, response) => {
+  let sql = 'delete from Staff where PersonID = ?;';
+  global.connection.query(sql, [personId], (err, response) => {
     if (err) console.error(err);
-    res.send(response);
+    sql = 'delete from Doctors where PersonID = ?;';
+    global.connection.query(sql, [personId], (err, response2) => {
+      if (err) console.error(err);
+      sql = 'delete from Patients where PersonID = ?;';
+      global.connection.query(sql, [personId], (err, response3) => {
+        if (err) console.error(err);
+        sql = 'delete from People where PersonID = ?;';
+        global.connection.query(sql, [personId], (err, response4) => {
+          if (err) console.error(err);
+          res.send(response);
+        });
+      });
+    });
   });
 };
 

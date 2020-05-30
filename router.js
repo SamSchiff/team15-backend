@@ -20,7 +20,7 @@ router.route('/doctor')
   .get(requireAuth, Controller.getDoctor)
   .post(requireAuth, Controller.createDoctor)
   .put(requireAuth, Controller.assignDoctorToWard) // update which ward
-  .delete(requireAuth, Controller.deletePerson);
+  .delete(Controller.deletePerson);
 
 router.route('/doctor/all')
   .get(requireAuth, Controller.getAllDoctors);
