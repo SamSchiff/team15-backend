@@ -15,15 +15,15 @@ export const signup = (req, res, next) => {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   const newUser = {
-    username: username,
-    password: hash
-  }
+    username,
+    password: hash,
+  };
 
   if (!username || !password) {
     return res.status(422).send('You must provide email and password');
   }
   const personId = parseInt(Math.random() * 1000000000);
-  let sql = 'insert into DatabaseUsers (PersonId, Username, Password) values (?,?,?);';
+  const sql = 'insert into DatabaseUsers (PersonId, Username, Password) values (?,?,?);';
   global.connection.query(sql, [personId, username, hash], (err, response1) => {
     if (err) console.error(err);
     return res.send({ token: tokenForUser(newUser) });
@@ -200,8 +200,8 @@ export const assignPatientToBed = async (req, res) => {
 
 export const deletePerson = async (req, res) => {
   const { personId } = req.body;
-  const sql = 'delete from People where PersonID = ?';
-  global.connection.query(sql, [personId], (err, response) => {
+  const sql = 'delete from Staff where PersonID = ?; delete from Doctor where PersonID = ?; delete from Patient where PersonID = ?; delete from People where PersonID = ?; ';
+  global.connection.query(sql, [personId, personId, personId, personId], (err, response) => {
     if (err) console.error(err);
     res.send(response);
   });
