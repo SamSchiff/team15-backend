@@ -17,6 +17,8 @@ select * from People as p inner join Staff as s on p.personID = s.PersonId inner
 
 select * from Wards where WardID = 123456;
 
+select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId inner join Beds as b on pa.BedID = b.BedID inner join Wards as w on b.WardId = w.wardId where w.WardID = 123456;
+
 insert into
 DatabaseUsers (
 	PersonId, Username, Password

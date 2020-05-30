@@ -137,7 +137,7 @@ export const getAllWards = async (req, res) => {
 
 export const getPatient = async (req, res) => {
   const { personId } = req.query;
-  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId where pe.PersonId = ?;';
+  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId inner join Beds as b on pa.BedID = b.BedID inner join Wards as w on b.WardId = w.wardId where pa.personID=?;';
   global.connection.query(sql, [personId], (err, response) => {
     if (err) console.error(err);
     res.send(response);
@@ -200,7 +200,7 @@ export const assignPatientToBed = async (req, res) => {
 
 export const deletePerson = async (req, res) => {
   const { personId } = req.body;
-  const sql = 'delete from Staff where PersonID = ?; delete from Doctor where PersonID = ?; delete from Patient where PersonID = ?; delete from People where PersonID = ?; ';
+  const sql = 'delete from Staff where PersonID = ?; delete from Doctors where PersonID = ?; delete from Patients where PersonID = ?; delete from People where PersonID = ?; ';
   global.connection.query(sql, [personId, personId, personId, personId], (err, response) => {
     if (err) console.error(err);
     res.send(response);
@@ -211,6 +211,15 @@ export const deleteBed = async (req, res) => {
   const { bedId } = req.body;
   const sql = 'delete from Beds where BedID = ?';
   global.connection.query(sql, [bedId], (err, response) => {
+    if (err) console.error(err);
+    res.send(response);
+  });
+};
+
+export const getWardPatients = async (req, res) => {
+  const { wardId } = req.query;
+  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId inner join Beds as b on pa.BedID = b.BedID inner join Wards as w on b.WardId = w.wardId where w.wardId=?;';
+  global.connection.query(sql, [wardId], (err, response) => {
     if (err) console.error(err);
     res.send(response);
   });

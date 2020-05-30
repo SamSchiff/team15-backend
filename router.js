@@ -43,6 +43,9 @@ router.route('/doctor/ward')
 router.route('/ward')
   .get(requireAuth, Controller.getWard);
 
+router.route('/ward/patients')
+  .get(Controller.getWardPatients);
+
 router.route('/ward/all')
   .get(requireAuth, Controller.getAllWards);
 
