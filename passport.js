@@ -15,17 +15,17 @@ const jwtOptions = {
 
 // username + password authentication strategy
 const localLogin = new LocalStrategy(localOptions, (username, password, done) => {
-  let sql = 'select * from DatabaseUsers where Username = ?;';
+  const sql = 'select * from DatabaseUsers where Username = ?;';
   global.connection.query(sql, [payload.sub], (err, response) => {
     if (err) {
       done(err);
     } else {
-      console.log(respone)
-      bcrypt.compare(username, response[0].Password, function(err, res) {
-        if(res === true) {
-          done(null, response)
+      console.log(respone);
+      bcrypt.compare(username, response[0].Password, (err, res) => {
+        if (res === true) {
+          done(null, response);
         } else {
-          done(null, false)
+          done(null, false);
         }
       });
     }
@@ -36,7 +36,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   // See if the user ID in the payload exists in our database
   // If it does, call 'done' with that other
   // otherwise, call done without a user object
-  let sql = 'select * from DatabaseUsers where Username = ?;';
+  const sql = 'select * from DatabaseUsers where Username = ?;';
   global.connection.query(sql, [payload.sub], (err, response) => {
     if (err) {
       done(err, false);
