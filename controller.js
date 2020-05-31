@@ -112,7 +112,7 @@ export const createBed = async (req, res) => {
 };
 
 export const getAllPatients = async (req, res) => {
-  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId inner join Wards as w on w.wardID = pa.wardID;';
+  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId left join Wards as w on w.wardID = pa.wardID;';
   global.connection.query(sql, (err, response) => {
     if (err) console.error(err);
     res.send(response);
@@ -137,7 +137,7 @@ export const getAllWards = async (req, res) => {
 
 export const getPatient = async (req, res) => {
   const { personId } = req.query;
-  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId inner join inner join Wards as w on w.wardId = pa.wardID where pa.personID=?;';
+  const sql = 'select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId left join inner join Wards as w on w.wardId = pa.wardID where pa.personID=?;';
   global.connection.query(sql, [personId], (err, response) => {
     if (err) console.error(err);
     res.send(response);
