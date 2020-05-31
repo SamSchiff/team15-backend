@@ -67,12 +67,12 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`Patients` (
   `CheckedIn` TINYINT NULL,
   `Diagnosis` VARCHAR(45) NULL,
   `COVIDRiskProfile` VARCHAR(45) NULL,
-  `BedID` INT NULL,
+  `WardID` INT NULL,
   PRIMARY KEY (`PersonID`),
-  INDEX `fk_Patients_Beds1_idx` (`BedID` ASC),
-  CONSTRAINT `fk_Patients_Beds1`
-    FOREIGN KEY (`BedID`)
-    REFERENCES `Hospitals_sp20`.`Beds` (`BedID`)
+  INDEX `fk_Patients_Wards1_idx` (`WardID` ASC),
+  CONSTRAINT `fk_Patients_Wards1`
+    FOREIGN KEY (`WardID`)
+    REFERENCES `Hospitals_sp20`.`Wards` (`WardID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Patients_People1`
@@ -81,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `Hospitals_sp20`.`Patients` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `Hospitals_sp20`.`Doctors`

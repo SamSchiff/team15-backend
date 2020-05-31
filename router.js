@@ -34,8 +34,8 @@ router.route('/patient')
 router.route('/patient/all')
   .get(requireAuth, Controller.getAllPatients);
 
-router.route('/patient/bed')
-  .put(requireAuth, Controller.assignPatientToBed); // connect a bedId to a patient
+router.route('/patient/ward')
+  .put(requireAuth, Controller.assignPatientToWard); // connect a wardID to a patient
 
 router.route('/doctor/ward')
   .put(requireAuth, Controller.assignDoctorToWard);

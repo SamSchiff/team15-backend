@@ -11,13 +11,13 @@ select * from People as pe inner join Patients as pa on pe.personID = pa.PersonI
 
 select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID;
 
-select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId where pe.PersonId = 12345;
+select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId;
 
 select * from People as p inner join Staff as s on p.personID = s.PersonId inner join Doctors as d on d.personID = p.personID where p.personId = 238987611;
 
 select * from Wards where WardID = 123456;
 
-select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId inner join Beds as b on pa.BedID = b.BedID inner join Wards as w on b.WardId = w.wardId where w.WardID = 123456;
+select * from People as pe inner join Patients as pa on pe.personID = pa.PersonId inner join Wards as w on pa.WardID = w.wardId;
 
 insert into
 DatabaseUsers (
@@ -95,3 +95,4 @@ Patients (
 values (
 	123456, 1
 );
+ 
